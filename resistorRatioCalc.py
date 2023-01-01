@@ -29,7 +29,7 @@ def findParallelComb(inputVal):
             currentComb = [i, j]
             currentBestComb = compareValuesParallel(
                 currentBestComb, currentComb, inputVal)
-    return currentBestComb, (1/(1/currentBestComb[0])+(1/currentBestComb[1]))
+    return currentBestComb, (1/((1/currentBestComb[0])+(1/currentBestComb[1])))
 
 
 # Find the series values
@@ -50,8 +50,14 @@ def compareValuesSeries(val1, val2, expectedVal):
 # Find the parallel values
 def compareValuesParallel(val1, val2, expectedVal):
     # Get the numerical values
-    num1 = (1/(1/val1[0]) + (1/val1[1]))
-    num2 = (1/(1/val2[0]) + (1/val2[1]))
+    if val1[0] == 0 or val1[1] == 0:
+        num1 = 0
+    else:
+        num1 = (1/((1/val1[0]) + (1/val1[1])))
+    if val2[0] == 0 or val2[1] == 0:
+        num2 = 0
+    else:
+        num2 = (1/((1/val2[0]) + (1/val2[1])))
     # Find the smaller distance to the expected val
     dist1 = abs(expectedVal - num1)
     dist2 = abs(expectedVal - num2)
