@@ -21,20 +21,9 @@ def findParallelComb(input):
 
 
 def compareValues(val1, val2, expectedVal):
-    # If either of the values are exactly correct
-    if val1 == expectedVal:
-        return val1
-    elif val2 == expectedVal:
-        return val2
-    # If both values are less
-    elif (val1 < expectedVal and val2 < expectedVal):
-        # Find closest
-        if (val1 > val2):
-            return val1
-        else:
-            return val2
-    # If both are greater than the expected
-    elif (val1 > expectedVal)
+    # Find the smaller distance to the expected val
+    dist1 = abs(expectedVal - val1)
+    dist2 = abs(expectedVal - val2)
 
 
 wantedVal = input("What value would you like to find the closest match to? ")
