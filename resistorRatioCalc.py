@@ -24,6 +24,10 @@ def compareValues(val1, val2, expectedVal):
     # Find the smaller distance to the expected val
     dist1 = abs(expectedVal - val1)
     dist2 = abs(expectedVal - val2)
+    if dist1 < dist2:
+        return dist1
+    else:
+        return dist2
 
 
 wantedVal = input("What value would you like to find the closest match to? ")
