@@ -69,7 +69,7 @@ def compareValuesParallel(val1, val2, expectedVal):
 
 
 # Function the find the variation between the values
-def findVariation(givenVal, expectedVal):
+def findAccuracy(givenVal, expectedVal):
     return (givenVal/expectedVal)*100
 
 
@@ -80,9 +80,11 @@ wantedVal = int(
 # Find the series value
 seriesPair, seriesValue = findSeriesComb(wantedVal)
 print("In series: ", seriesPair, ", ", seriesValue, "Ohms")
-print("Variation: ", findVariation(seriesValue, wantedVal), "%")
+print("Accuracy: ", findAccuracy(seriesValue, wantedVal), "%")
+# Formatting
+print()
 
 # Find the parallel value
 parallelPair, parallelValue = findParallelComb(wantedVal)
 print("In parallel: ", parallelPair, ", ", parallelValue, "Ohms")
-print("Variation ", findVariation(parallelValue, wantedVal), "%")
+print("Accuracy ", findAccuracy(parallelValue, wantedVal), "%")
