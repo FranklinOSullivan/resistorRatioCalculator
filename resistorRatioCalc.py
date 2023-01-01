@@ -7,19 +7,16 @@ resistorValues = [0, 10, 22, 47, 100, 150, 200, 220, 270, 330, 470,
 
 # Function to find the best series combination
 def findSeriesComb(inputVal):
-    # Predefine all values
-    currentBestVal = 0
-    currentVal = 0
+    # Predefine array values
     currentBestComb = [0, 0]
-    currentComb = []
+    currentComb = [0, 0]
     # Loop through to find the closest value
     for i in resistorValues:
         for j in resistorValues:
-            currentVal = i+j
-            currentBestVal = compareValues(
-                currentBestVal, currentVal, inputVal)
-
-    return currentBestVal
+            currentComb = [i, j]
+            currentBestComb = compareValues(
+                currentBestComb, currentComb, inputVal)
+    return currentBestComb
 
 
 def findParallelComb(inputVal):
@@ -27,17 +24,22 @@ def findParallelComb(inputVal):
 
 
 def compareValues(val1, val2, expectedVal):
+    # Get the numerical values
+    num1 = val1[0] + val1[1]
+    num2 = val2[0] + val2[1]
     # Find the smaller distance to the expected val
-    dist1 = abs(expectedVal - val1)
-    dist2 = abs(expectedVal - val2)
+    dist1 = abs(expectedVal - num1)
+    dist2 = abs(expectedVal - num2)
+    # Based on the distance, return the best combination
     if dist1 < dist2:
-        return dist1
+        return val1
     else:
-        return dist2
+        return val2
 
 
-wantedVal = input("What value would you like to find the closest match to? ")
+wantedVal = int(input("What value would you like to find the closest match to? "))
 
 
 # Find the series value
 seriesPair = findSeriesComb(wantedVal)
+print(seriesPair)
