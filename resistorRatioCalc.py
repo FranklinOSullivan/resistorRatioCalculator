@@ -6,17 +6,23 @@ resistorValues = [0, 10, 22, 47, 100, 150, 200, 220, 270, 330, 470,
 
 
 # Function to find the best series combination
-def findSeriesComb(input):
+def findSeriesComb(inputVal):
+    # Predefine all values
     currentBestVal = 0
+    currentVal = 0
+    currentBestComb = [0, 0]
+    currentComb = []
     # Loop through to find the closest value
     for i in resistorValues:
         for j in resistorValues:
             currentVal = i+j
+            currentBestVal = compareValues(
+                currentBestVal, currentVal, inputVal)
 
-    return
+    return currentBestVal
 
 
-def findParallelComb(input):
+def findParallelComb(inputVal):
     return
 
 
