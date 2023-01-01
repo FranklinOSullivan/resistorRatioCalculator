@@ -37,9 +37,16 @@ def compareValues(val1, val2, expectedVal):
         return val2
 
 
-wantedVal = int(input("What value would you like to find the closest match to? "))
+# Function the find the variation between the values
+def findVariation(givenVal, expectedVal):
+    return ((givenVal[0] + givenVal[1])/expectedVal)*100
+
+
+wantedVal = int(
+    input("What value would you like to find the closest match to? "))
 
 
 # Find the series value
 seriesPair = findSeriesComb(wantedVal)
 print(seriesPair)
+print("Variation: ", findVariation(seriesPair, wantedVal), "%")
