@@ -14,16 +14,26 @@ def findSeriesComb(inputVal):
     for i in resistorValues:
         for j in resistorValues:
             currentComb = [i, j]
-            currentBestComb = compareValues(
+            currentBestComb = compareValuesSeries(
                 currentBestComb, currentComb, inputVal)
-    return currentBestComb
+    return currentBestComb, currentBestComb[0] + currentBestComb[1]
 
 
 def findParallelComb(inputVal):
-    return
+    # Predefine array values
+    currentBestComb = [0, 0]
+    currentComb = [0, 0]
+    # Loop to find the best values
+    for i in resistorValues:
+        for j in resistorValues:
+            currentComb = [i, j]
+            currentBestComb = compareValuesParallel(
+                currentBestComb, currentComb, inputVal)
+    return currentBestComb, (1/(1/currentBestComb[0])+(1/currentBestComb[1]))
 
 
-def compareValues(val1, val2, expectedVal):
+# Find the series values
+def compareValuesSeries(val1, val2, expectedVal):
     # Get the numerical values
     num1 = val1[0] + val1[1]
     num2 = val2[0] + val2[1]
@@ -37,9 +47,24 @@ def compareValues(val1, val2, expectedVal):
         return val2
 
 
+# Find the parallel values
+def compareValuesParallel(val1, val2, expectedVal):
+    # Get the numerical values
+    num1 = (1/(1/val1[0]) + (1/val1[1]))
+    num2 = (1/(1/val2[0]) + (1/val2[1]))
+    # Find the smaller distance to the expected val
+    dist1 = abs(expectedVal - num1)
+    dist2 = abs(expectedVal - num2)
+    # Based on the distance, return the best combination
+    if dist1 < dist2:
+        return val1
+    else:
+        return val2
+
+
 # Function the find the variation between the values
 def findVariation(givenVal, expectedVal):
-    return ((givenVal[0] + givenVal[1])/expectedVal)*100
+    return (givenVal/expectedVal)*100
 
 
 wantedVal = int(
@@ -47,6 +72,11 @@ wantedVal = int(
 
 
 # Find the series value
-seriesPair = findSeriesComb(wantedVal)
-print(seriesPair)
-print("Variation: ", findVariation(seriesPair, wantedVal), "%")
+seriesPair, seriesValue = findSeriesComb(wantedVal)
+print("In series: ", seriesPair, ", ", seriesValue, "Ohms")
+print("Variation: ", findVariation(seriesValue, wantedVal), "%")
+
+# Find the parallel value
+parallelPair, parallelValue = findParallelComb(wantedVal)
+print("In parallel: ", parallelPair, ", ", parallelValue, "Ohms")
+print("Variation ", findVariation(parallelValue, wantedVal), "%")
